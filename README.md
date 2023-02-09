@@ -4,7 +4,7 @@ The focus of this project is "How to use trace output for unified logging" and "
 
 ## Tracing vs. Logging vs. Telemetry
 
-In many of my small projects i have a simple trace output during developoment and the output is written to logfiles in production.
+In many of my small projects i have a simple trace output during development and the output is written to logfiles in production.
 
 Seems to be good but there are some problems:
 - logfiles are unreaded, except someone tells me that there is a problem
@@ -16,11 +16,11 @@ Seems to be good but there are some problems:
 
 We monitoring most of the infrastructure components in the company network with Zabbix.
 
-That is ok, that is good, have a look of them. But here we cannot look inside the applications, so the app has to tell us, that there is a problem.
+That is ok, that is good, have a look of them. But here we cannot look inside the applications, so the app has to tell us that there is a problem.
 
-That is why we need a logging. To simplify the terms we can say that logging is a smaller part of tracing, and tracing is a smaller part of debug output.
+That is why we need logging. To simplify the terms we can say that logging is a smaller part of tracing, and tracing is a smaller part of debug output.
 
-For Debug output we can use `System.Diagnostics.Debug` and for Trace output we can use `System.Diagnostics.Trace`. When we neither define `DEBUG` or `TRACE` in the project, then we dont have any output!
+For ``Debug`` output we can use `System.Diagnostics.Debug` and for ``Trace`` output we can use `System.Diagnostics.Trace`. When we neither define `DEBUG` or `TRACE` in the project, then we dont have any output!
 
 At this point we have to think about logging, DI, IoC and maybe IoT.
 
