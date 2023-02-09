@@ -33,7 +33,7 @@ namespace Syslog.Transport
         /// <summary>
         /// True if client is connected to remote host
         /// </summary>
-        public bool Connected => this.client?.Client.Connected == true;
+        public bool Connected => this.client?.Client?.Connected == true;
 
         /// <summary>
         /// Initializes a new instance

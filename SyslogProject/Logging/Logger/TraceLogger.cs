@@ -59,7 +59,7 @@ namespace Logging.Logger
         /// <returns></returns>
         ILoggingService ILoggingService.Get<T>()
         {
-            return Get<T>();
+            return (this as ILoggingService).Get(typeof(T).Name);
         }
 
         /// <summary>
