@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<TargetFrameworks>net47;net6.0;net6.0-windows</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<AssemblyVersion>1.$([System.DateTime]::Now.ToString(yy.M.d))</AssemblyVersion>
+		<FileVersion>1.$([System.DateTime]::Now.ToString(yy.M.d))</FileVersion>
+		<Company>Omni Trash</Company>
+		<Authors>O. Trash</Authors>
+		<Version>1.$([System.DateTime]::Now.ToString(yy.M.d))</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Logging</Title>
+		<Description>Uses Trace Output for Logging</Description>
+		<PackageOutputPath>..\Nupkg</PackageOutputPath>
+		<PackageId>$(AssemblyName)</PackageId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Syslog\Syslog.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+</Project>
