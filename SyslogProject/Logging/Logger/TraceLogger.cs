@@ -4,7 +4,7 @@ using System.Xml.Linq;
 namespace Logging.Logger
 {
     /// <summary>
-    /// Logging using Trace
+    /// Logging Service using Trace
     /// </summary>
     public class TraceLogger : ILoggingService
     {
@@ -14,7 +14,7 @@ namespace Logging.Logger
         string name { get; set; }
 
         /// <summary>
-        /// Creates a new logger
+        /// Initializes a new instance of <see cref=""/>
         /// </summary>
         /// <param name="name"></param>
         private TraceLogger(string name)
@@ -23,27 +23,27 @@ namespace Logging.Logger
         }
 
         /// <summary>
-        /// Creates a new logger
+        /// Creates a new logging service
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static TraceLogger Get(string name)
+        public static ILoggingService Get(string name)
         {
             return new TraceLogger(name);
         }
 
         /// <summary>
-        /// Creates a new logger
+        /// Creates a new logging service
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static TraceLogger Get<T>()
+        public static ILoggingService Get<T>()
         {
             return Get(typeof(T).Name);
         }
 
         /// <summary>
-        /// Creates a new logger
+        /// Creates a new logging service
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace Logging.Logger
         }
 
         /// <summary>
-        /// Creates a new logger
+        /// Creates a new logging service
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

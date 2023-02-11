@@ -1,24 +1,31 @@
-﻿
-namespace Logging.Logger
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Logging.Logger.Default
 {
+    using Generic;
+
     /// <summary>
-    /// Logging Service interface
+    /// Default Logger interface used for DI
     /// </summary>
-    public interface ILoggingService
+    public interface ILogger
     {
         /// <summary>
-        /// Ceates a new <see cref="ILoggingService"/>
+        /// Creates a new <see cref="ILogger"/>
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        ILoggingService Get(string name);
+        ILogger GetLogger(string name);
 
         /// <summary>
-        /// Ceates a new <see cref="ILoggingService"/>
+        /// Creates a new <see cref="ILogger{T}"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        ILoggingService Get<T>();
+        ILogger<T> GetLogger<T>();
 
         /// <summary>
         /// Writes an informational message

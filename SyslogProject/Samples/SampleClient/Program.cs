@@ -1,4 +1,7 @@
-﻿using Logging.Terminal;
+﻿using Logging.Logger;
+using Logging.Logger.Default;
+using Logging.Logger.Default.Generic;
+using Logging.Terminal;
 using Logging.Tracing;
 using System.Diagnostics;
 using System.Text;
@@ -9,6 +12,12 @@ namespace SampleClient
     {
         // one ore more syslog servers
         readonly string syslogServers = "localhost dev game1";
+
+        // logging service to use
+        static readonly ILoggingService tracing = TraceLogger.Get("SampleClient")!;
+
+        // logger to use
+        readonly ILogger logger = new Logger<Program>(tracing);
 
         static void Main(string[] args)
         {
@@ -27,7 +36,7 @@ namespace SampleClient
             Trace.TraceInformation("Program start");
 
             // Run the test
-            TestCase();
+            TestCase(logger.GetLogger(nameof(TestCase)));
 
             Trace.TraceInformation("Program exit");
             Trace.Close();
@@ -51,20 +60,17 @@ namespace SampleClient
         /// <summary>
         /// Writes some messages during infinity loop
         /// </summary>
-        private static void TestCase()
+        private static void TestCase(ILogger logger)
         {
             ManualResetEvent quit = new(false);
             ConsoleTerminate(quit);
 
             string BOM = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
 
-            Logging.Logger.ILoggingService loggerA = Logging.Logger.TraceLogger.Get(nameof(loggerA));
-            Logging.Logger.ILoggingService loggerB = loggerA.Get(nameof(loggerB));
-
             do
             {
-                loggerA.Info("Hello from logger A");
-                loggerB.Info("Hello from logger B");
+                // "SampleClient.Program.TestCase:> Hello World"
+                logger.Info("Hello World");
 
                 Trace.TraceInformation($"Hallo Welt, das ist ein Test ... öäüß");
 
