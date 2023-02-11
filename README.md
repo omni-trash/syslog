@@ -40,6 +40,10 @@ This project here shares these parts with u.
 - SampleClient (client demo)
 - SampleServer (syslog server demo)
 
+|||
+|-|-|
+|Target|net47;net6.0;net6.0-windows|
+|Editor|VS2022|
 
 ## Point of view
 
