@@ -47,7 +47,7 @@ namespace ConsoleApp
 }
 ```
 
-![Overview](./Images/trace-to-console.png)
+![Console Output](./Images/trace-to-console.png)
 
 If u dont want to write that code manually u can use the `TraceUtil.AddConsoleColorCodeToTrace`.
 
@@ -96,4 +96,4 @@ namespace ConsoleApp
 }
 ```
 
-![Overview](./Images/trace-messages.png)
+![Console Output](./Images/trace-messages.png)

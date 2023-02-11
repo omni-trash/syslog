@@ -43,7 +43,7 @@ namespace ConsoleApp
 
 The trace messages are send to the syslog server.
 
-![Overview](./Images/trace-to-syslog-server.png)
+![Syslog Server Output](./Images/trace-to-syslog-server.png)
 
 If u dont want to write that code manually u can use the ``TraceUtil.AddSyslogToTrace``.
 
