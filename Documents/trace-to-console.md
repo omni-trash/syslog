@@ -72,3 +72,28 @@ namespace ConsoleApp
     }
 }
 ```
+
+The ``Trace`` has three methods we want to use.
+
+```csharp
+using Logging.Tracing;
+using System.Diagnostics;
+
+namespace ConsoleApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            TraceUtil.AddConsoleColorCodeToTrace();
+
+            // the three levels we did support
+            Trace.TraceInformation("That is an informational message");
+            Trace.TraceWarning("That is a warning message");
+            Trace.TraceError("That is an error message");
+        }
+    }
+}
+```
+
+![Overview](./Images/trace-messages.png)
