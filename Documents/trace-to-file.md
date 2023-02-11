@@ -1,6 +1,6 @@
 # Trace to File
 
-If u want to write trace messages to a file u have to add a `TextWriterTraceListern` and u have to enable `TRACE`.
+If u want to write trace messages to a file u have to add a `TextWriterTraceLister` and u have to enable `TRACE`.
 
 ```csharp
 using System.Diagnostics;
