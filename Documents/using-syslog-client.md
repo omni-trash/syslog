@@ -46,7 +46,7 @@ APPNAME   = AppDomain.CurrentDomain.FriendlyName,
 PROCID    = Environment.ProcessId
 ```
 
-The syslog client stops sending any message on error.
+The syslog client stops sending any message on network error.
 
 If u want to reconnect to the remote syslog server, u have to listen on the ``OnError`` event and then u have to ``Reset`` the syslog client.
 
