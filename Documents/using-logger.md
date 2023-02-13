@@ -119,3 +119,80 @@ namespace ConsoleApp
     }
 }
 ```
+
+This example shows u the base with ``Unity.Mvc``.
+
+```csharp
+// UnityConfig.cs
+using Logging.Logger;
+using Logging.Logger.Default;
+using Logging.Logger.Default.Generic;
+using System;
+using Unity;
+using Unity.Injection;
+
+namespace WebApp
+{
+	public static class UnityConfig
+    {
+        private static Lazy<IUnityContainer> container =
+          new Lazy<IUnityContainer>(() =>
+          {
+              var container = new UnityContainer();
+              RegisterTypes(container);
+              return container;
+          });
+
+        public static IUnityContainer Container => container.Value;
+
+        public static void RegisterTypes(IUnityContainer container)
+        {
+            // base logging service
+            container.RegisterInstance<ILoggingService>(TraceLogger.Get(nameof(WebApp)));
+            container.RegisterType<ILogger, Logger>();
+            container.RegisterType(typeof(ILogger<>), typeof(Logger<>));
+        }
+    }
+}
+
+...
+// Global.asax.cs
+using Logging.Tracing;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebApp
+{
+    public class MvcApplication : HttpApplication
+    {
+        protected void Application_Start()
+        {
+            // syslog
+            TraceUtil.AddSyslogToTrace("localhost");
+        }
+    }
+}
+
+...
+// HomeController.cs
+using Logging.Logger;
+using Logging.Logger.Default;
+using Logging.Logger.Default.Generic;
+using System;
+using System.Web.Mvc;
+
+namespace WebApp
+{
+    [RoutePrefix("")]
+    public class HomeController : MvcController
+    {
+		readonly ILogger logger;
+
+        public HomeController(ILogger<HomeController> logger)
+		{
+			this.logger = logger;
+			this.logger.Info("Hello World");
+		}
+    }
+}
+```
