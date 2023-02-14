@@ -2,8 +2,6 @@
 
 The ``Logger`` in this library exists for dependency injection.
 
-There is no ``LoggerFactory`` or ``LogManager`` to create a ``Logger``.
-
 The ``Logger`` in this library consumes an ``ILoggingService``, and there is currently only the ``TraceLogger`` with that interface.
 
 ```
@@ -65,6 +63,38 @@ namespace ConsoleApp
             logger.Info("Hello World");
             // Output
             // INF [2023-02-12 15:27:31.248]:> ConsoleApp.Program:> Hello World
+        }
+    }
+}
+```
+
+You can also use the ``LogUtil`` in your module to create a ``Logger``, like ``LoggerFactory`` or ``LogManager`` in other libraries. 
+
+```csharp
+using Logging.Logger;
+using Logging.Logger.Default;
+using Logging.Tracing;
+
+namespace ConsoleApp
+{
+    internal class Program
+    {
+        readonly ILogger logger = LogUtil.GetLogger<Program>();
+
+        static void Main(string[] args)
+        {
+            // someone should trace to console
+            TraceUtil.AddConsoleColorCodeToTrace();
+
+            new Program().Run();
+        }
+
+        void Run()
+        {
+            logger.Info("Hello World");
+
+            // Output
+            // INF [2023-02-14 07:00:51.771]:> ConsoleApp.Program:> Hello World
         }
     }
 }
@@ -133,15 +163,15 @@ using Unity.Injection;
 
 namespace WebApp
 {
-	public static class UnityConfig
+    public static class UnityConfig
     {
-        private static Lazy<IUnityContainer> container =
-          new Lazy<IUnityContainer>(() =>
-          {
-              var container = new UnityContainer();
-              RegisterTypes(container);
-              return container;
-          });
+        private static Lazy<IUnityContainer> container = 
+            new Lazy<IUnityContainer>(() =>
+            {
+                var container = new UnityContainer();
+                RegisterTypes(container);
+                return container;
+            });
 
         public static IUnityContainer Container => container.Value;
 
@@ -186,13 +216,13 @@ namespace WebApp
     [RoutePrefix("")]
     public class HomeController : MvcController
     {
-		readonly ILogger logger;
+        readonly ILogger logger;
 
         public HomeController(ILogger<HomeController> logger)
-		{
-			this.logger = logger;
-			this.logger.Info("Hello World");
-		}
+        {
+            this.logger = logger;
+            this.logger.Info("Hello World");
+        }
     }
 }
 ```
